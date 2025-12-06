@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Help & Support - Home Security</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #1a5276 0%, #154360 100%);
+            color: white;
+            padding-top: 30px;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            padding: 0 25px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .logo h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        .nav-menu {
+            padding: 0 15px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            width: 24px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .header-title h1 {
+            color: #1a5276;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header-title p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .contact-btn {
+            background: #3498db;
+            color: white;
+        }
+        
+        .guide-btn {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: #95a5a6;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Help Container */
+        .help-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        /* Quick Help Cards */
+        .quick-help {
+            padding: 30px;
+            background: linear-gradient(135deg, #1a5276 0%, #3498db 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .quick-help h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .quick-help p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .quick-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .quick-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .quick-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+        
+        .quick-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .quick-card h4 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .quick-card p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 40px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            color: #1a5276;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .faq-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: all 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #e8f4fc;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: #5d6d7e;
+            line-height: 1.6;
+        }
+        
+        .faq-answer.show {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        /* Step-by-Step Guides */
+        .guides-section {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .guide-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .guide-step {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 25px;
+            top: 25px;
+            width: 40px;
+            height: 40px;
+            background: #1a5276;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .guide-step h4 {
+            color: #1a5276;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 40px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #f1f1f1;
+            transition: all 0.3s;
+        }
+        
+        .contact-card:hover {
+            border-color: #3498db;
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #1a5276;
+        }
+        
+        .contact-card h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .contact-card p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .contact-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .contact-link:hover {
+            background: #2980b9;
+        }
+        
+        /* Chat Bot Section */
+        .chatbot-section {
+            padding: 40px;
+            background: #e8f4fc;
+            border-top: 2px solid #f1f1f1;
+        }
+        
+        .chatbot-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+        
+        .chatbot-header {
+            background: #1a5276;
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .chatbot-icon {
+            font-size: 24px;
+            background: #3498db;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chatbot-header h4 {
+            font-size: 18px;
+            margin: 0;
+        }
+        
+        .chatbot-messages {
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .message {
+            padding: 12px 18px;
+            border-radius: 18px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .bot-message {
+            background: #f1f1f1;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .user-message {
+            background: #3498db;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .chatbot-input {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 14px;
+        }
+        
+        .chatbot-input input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .chatbot-input button {
+            background: #1a5276;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+        }
+        
+        .chatbot-input button:hover {
+            background: #3498db;
+            transform: scale(1.05);
+        }
+        
+        /* Quick Questions */
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .quick-question {
+            background: #f1f1f1;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .quick-question:hover {
+            background: #3498db;
+            color: white;
+        }
+        
+        /* Troubleshooting Section */
+        .troubleshooting {
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .problem-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .problem-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .problem-header {
+            padding: 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: #2c3e50;
+            transition: all 0.3s;
+        }
+        
+        .problem-header:hover {
+            background: #e8f4fc;
+        }
+        
+        .solution {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: #5d6d7e;
+            line-height: 1.6;
+        }
+        
+        .solution.show {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar .nav-text {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .logo h2 span {
+                display: none;
+            }
+            
+            .quick-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .guide-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>
+                <span class="logo-icon">🏠</span>
+                <span>Home Security</span>
+            </h2>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="database.html" class="nav-item">
+                <span class="nav-icon">👨‍👩‍👧‍👦</span>
+                <span class="nav-text">Family & Friends</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Settings</span>
+            </a>
+            <a href="help.html" class="nav-item active">
+                <span class="nav-icon">❓</span>
+                <span class="nav-text">Help</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">
+                <h1>Help & Support Center</h1>
+                <p>Get help with your Smart Home Security System</p>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn guide-btn" onclick="downloadUserGuide()">
+                    📖 Download Guide
+                </button>
+                <button class="btn contact-btn" onclick="scrollToContact()">
+                    📞 Contact Support
+                </button>
+                <button class="btn logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+        
+        <!-- Help Container -->
+        <div class="help-container">
+            <!-- Quick Help Section -->
+            <div class="quick-help">
+                <h2>How can we help you today?</h2>
+                <p>Find quick answers to common questions</p>
+                
+                <div class="quick-cards">
+                    <div class="quick-card" onclick="openFAQ(0)">
+                        <div class="quick-icon">👥</div>
+                        <h4>Add Family Members</h4>
+                        <p>Learn how to add people to face recognition</p>
+                    </div>
+                    
+                    <div class="quick-card" onclick="openFAQ(1)">
+                        <div class="quick-icon">📱</div>
+                        <h4>WhatsApp Alerts</h4>
+                        <p>Setup instant security notifications</p>
+                    </div>
+                    
+                    <div class="quick-card" onclick="scrollToChatbot()">
+                        <div class="quick-icon">💬</div>
+                        <h4>AI Assistant</h4>
+                        <p>Chat with our smart assistant</p>
+                    </div>
+                    
+                    <div class="quick-card" onclick="scrollToTroubleshooting()">
+                        <div class="quick-icon">🔧</div>
+                        <h4>Troubleshooting</h4>
+                        <p>Fix common problems quickly</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h3 class="section-title">❓ Frequently Asked Questions</h3>
+                
+                <div class="faq-item" id="faq1">
+                    <div class="faq-question" onclick="toggleFAQ(1)">
+                        How do I add a new family member to the system?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer" id="answer1">
+                        <p>To add a new family member:</p>
+                        <ol>
+                            <li>Go to <strong>Family & Friends</strong> page</li>
+                            <li>Click the <strong>"+ Add Person"</strong> button</li>
+                            <li>Enter the person's full name</li>
+                            <li>Select their relation (Family Member, Friend, etc.)</li>
+                            <li>Choose access level (Full/Limited/Temporary)</li>
+                            <li>Click <strong>"Add to Home"</strong></li>
+                            <li>Have the person stand in front of the camera to capture their face</li>
+                        </ol>
+                        <p><strong>Note:</strong> Make sure the person is in good lighting and facing the camera directly for best recognition.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" id="faq2">
+                    <div class="faq-question" onclick="toggleFAQ(2)">
+                        How do WhatsApp alerts work?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer" id="answer2">
+                        <p>The system sends WhatsApp alerts in these situations:</p>
+                        <ul>
+                            <li><strong>Unknown Person Detected:</strong> Photo + timestamp sent immediately</li>
+                            <li><strong>Door Forced Open:</strong> Alert when door is opened without recognition</li>
+                            <li><strong>System Alerts:</strong> Low battery, camera offline, etc.</li>
+                        </ul>
+                        <p><strong>To setup WhatsApp alerts:</strong></p>
+                        <ol>
+                            <li>Go to <strong>Settings → Notifications</strong></li>
+                            <li>Turn on <strong>"WhatsApp Alerts"</strong></li>
+                            <li>Enter your WhatsApp number</li>
+                            <li>Choose which alerts to receive</li>
+                            <li>Save settings</li>
+                        </ol>
+                        <p>You'll receive a confirmation message on your WhatsApp when setup is complete.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" id="faq3">
+                    <div class="faq-question" onclick="toggleFAQ(3)">
+                        How long does face recognition take?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer" id="answer3">
+                        <p>Recognition speed depends on several factors:</p>
+                        <ul>
+                            <li><strong>Known person:</strong> 1-2 seconds</li>
+                            <li><strong>Unknown person:</strong> 2-3 seconds (includes alert processing)</li>
+                            <li><strong>Light conditions:</strong> Good light = faster recognition</li>
+                            <li><strong>WiFi speed:</strong> Faster internet = quicker alerts</li>
+                        </ul>
+                        <p><strong>For best performance:</strong></p>
+                        <ul>
+                            <li>Keep camera lens clean</li>
+                            <li>Ensure strong WiFi signal</li>
+                            <li>Use medium resolution setting</li>
+                            <li>Regularly update face database</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" id="faq4">
+                    <div class="faq-question" onclick="toggleFAQ(4)">
+                        Can I give temporary access to delivery people?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer" id="answer4">
+                        <p>Yes! You can set up temporary access:</p>
+                        <ol>
+                            <li>Add the person as <strong>"Delivery Person"</strong> in database</li>
+                            <li>Set access level to <strong>"Temporary"</strong></li>
+                            <li>Set specific time slots (e.g., 10 AM - 6 PM)</li>
+                            <li>Enable one-time access codes if needed</li>
+                        </ol>
+                        <p><strong>Features for delivery access:</strong></p>
+                        <ul>
+                            <li>Time-restricted access</li>
+                            <li>Photo capture on entry/exit</li>
+                            <li>Special alert notifications</li>
+                            <li>Automatic removal after time expires</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" id="faq5">
+                    <div class="faq-question" onclick="toggleFAQ(5)">
+                        How do I backup my face recognition database?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer" id="answer5">
+                        <p>To backup your database:</p>
+                        <ol>
+                            <li>Go to <strong>Settings → Database</strong></li>
+                            <li>Click <strong>"Backup Database"</strong> button</li>
+                            <li>Choose backup location (Cloud/Local)</li>
+                            <li>Set automatic backup schedule (Daily/Weekly)</li>
+                            <li>Add email for backup notifications</li>
+                        </ol>
+                        <p><strong>Backup Options:</strong></p>
+                        <ul>
+                            <li><strong>Local Backup:</strong> Save to your computer</li>
+                            <li><strong>Cloud Backup:</strong> Automatic backup to secure cloud</li>
+                            <li><strong>Export CSV:</strong> Export names and access levels</li>
+                            <li><strong>Full System Backup:</strong> Settings + Database + Logs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step-by-Step Guides -->
+            <div class="guides-section">
+                <h3 class="section-title">📖 Step-by-Step Guides</h3>
+                
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <div class="step-number">1</div>
+                        <h4>Initial Setup Guide</h4>
+                        <p>Complete setup instructions for new system installation including hardware connections and software configuration.</p>
+                        <button onclick="viewGuide('setup')" style="background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; margin-top: 10px; cursor: pointer;">View Guide</button>
+                    </div>
+                    
+                    <div class="guide-step">
+                        <div class="step-number">2</div>
+                        <h4>Face Training Guide</h4>
+                        <p>How to properly capture faces for best recognition results. Includes lighting tips and positioning guidelines.</p>
+                        <button onclick="viewGuide('face')" style="background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; margin-top: 10px; cursor: pointer;">View Guide</button>
+                    </div>
+                    
+                    <div class="guide-step">
+                        <div class="step-number">3</div>
+                        <h4>Alert Configuration</h4>
+                        <p>Setup WhatsApp, email, and SMS alerts. Configure alert types and frequency preferences.</p>
+                        <button onclick="viewGuide('alerts')" style="background: #3498db; color: white; border: none; padding: 8px 15px; border-radius: 5px; margin-top: 10px; cursor: pointer;">View Guide</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Bot Section -->
+            <div class="chatbot-section">
+                <h3 class="section-title">💬 AI Support Assistant</h3>
+                <p>Ask me anything about your security system. I'm here to help 24/7!</p>
+                
+                <div class="chatbot-container">
+                    <div class="chatbot-header">
+                        <div class="chatbot-icon">🤖</div>
+                        <div>
+                            <h4>Security AI Assistant</h4>
+                            <p style="font-size: 12px; opacity: 0.9;">Online • Ready to help</p>
+                        </div>
+                    </div>
+                    
+                    <div class="chatbot-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            👋 Hello! I'm your Security Assistant. How can I help you today?
+                        </div>
+                        <div class="message bot-message">
+                            Try asking me questions like:
+                            <div class="quick-questions">
+                                <button class="quick-question" onclick="askQuestion('How to add a family member?')">How to add family?</button>
+                                <button class="quick-question" onclick="askQuestion('WhatsApp alerts setup')">WhatsApp alerts</button>
+                                <button class="quick-question" onclick="askQuestion('Camera not working')">Camera issues</button>
+                                <button class="quick-question" onclick="askQuestion('System reset')">Reset system</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chatbot-input">
+                        <input type="text" id="chatInput" placeholder="Type your question here..." onkeypress="handleChatEnter(event)">
+                        <button onclick="sendMessage()">➤</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Support -->
+            <div class="contact-section">
+                <h3 class="section-title">📞 Contact Support</h3>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h4>Email Support</h4>
+                        <p>Get help via email. We respond within 24 hours.</p>
+                        <a href="mailto:support@homesecurity.com" class="contact-link">Send Email</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">📱</div>
+                        <h4>Phone Support</h4>
+                        <p>Call our support team for immediate assistance.</p>
+                        <a href="tel:+911800123456" class="contact-link">Call Now</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">🕒</div>
+                        <h4>24/7 Emergency</h4>
+                        <p>Emergency support for critical issues.</p>
+                        <a href="tel:+911800999888" class="contact-link" style="background: #e74c3c;">Emergency Call</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">📋</div>
+                        <h4>User Manual</h4>
+                        <p>Download complete user manual PDF.</p>
+                        <button onclick="downloadUserGuide()" class="contact-link">Download PDF</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Troubleshooting -->
+            <div class="troubleshooting">
+                <h3 class="section-title">🔧 Quick Troubleshooting</h3>
+                
+                <div class="problem-list">
+                    <div class="problem-item">
+                        <div class="problem-header" onclick="toggleSolution(1)">
+                            <span><strong>Problem:</strong> Camera showing black screen</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="solution" id="solution1">
+                            <p><strong>Solution:</strong></p>
+                            <ol>
+                                <li>Check camera power connection</li>
+                                <li>Restart ESP32-CAM module</li>
+                                <li>Check WiFi connection</li>
+                                <li>Clean camera lens</li>
+                                <li>Update camera firmware</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-header" onclick="toggleSolution(2)">
+                            <span><strong>Problem:</strong> WhatsApp alerts not working</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="solution" id="solution2">
+                            <p><strong>Solution:</strong></p>
+                            <ol>
+                                <li>Check internet connection</li>
+                                <li>Verify phone number in settings</li>
+                                <li>Check WhatsApp is installed</li>
+                                <li>Restart system</li>
+                                <li>Test with demo alert</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-item">
+                        <div class="problem-header" onclick="toggleSolution(3)">
+                            <span><strong>Problem:</strong> Face recognition slow</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="solution" id="solution3">
+                            <p><strong>Solution:</strong></p>
+                            <ol>
+                                <li>Improve lighting conditions</li>
+                                <li>Clean camera lens</li>
+                                <li>Update face database</li>
+                                <li>Check WiFi signal strength</li>
+                                <li>Reduce database size</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== CHAT BOT FUNCTIONS ==========
+        const chatResponses = {
+            // Greetings
+            "hello": "👋 Hello! I'm your Security Assistant. How can I help with your home security system?",
+            "hi": "👋 Hi there! Need help with your security system?",
+            
+            // Family Members
+            "how to add family": "To add family members:\n1. Go to Family & Friends page\n2. Click '+ Add Person'\n3. Enter name and details\n4. Have them face the camera\n5. Save their face data",
+            "add family member": "You can add family members from the 'Family & Friends' page. Click the add button and follow the on-screen instructions.",
+            "remove family member": "To remove someone:\n1. Go to Family & Friends\n2. Find the person\n3. Click 'Remove'\n4. Confirm deletion",
+            
+            // WhatsApp Alerts
+            "whatsapp alerts": "WhatsApp alerts setup:\n1. Go to Settings → Notifications\n2. Enable WhatsApp alerts\n3. Enter your phone number\n4. Choose alert types\n5. Test with demo alert",
+            "setup whatsapp": "To setup WhatsApp alerts, go to Settings → Notifications and enable WhatsApp. Enter your phone number and save.",
+            
+            // Camera Issues
+            "camera not working": "If camera isn't working:\n1. Check power connection\n2. Restart ESP32-CAM\n3. Check WiFi\n4. Clean lens\n5. Update firmware",
+            "camera black screen": "Black screen fix:\n1. Check power supply\n2. Restart camera module\n3. Verify WiFi connection\n4. Check camera settings",
+            
+            // System Issues
+            "system reset": "To reset system:\n1. Go to Settings → System\n2. Click 'Factory Reset'\n3. Enter admin password\n4. Confirm reset\n⚠️ This will erase all data!",
+            "forgot password": "If you forgot password:\n1. Use 'Forgot Password' on login\n2. Check your email for reset link\n3. Or contact support at support@homesecurity.com",
+            
+            // Door Issues
+            "door not opening": "If door doesn't open:\n1. Check servo motor connection\n2. Test manual override\n3. Check recognition settings\n4. Look for obstructions",
+            "door issues": "For door problems:\n1. Check power to servo\n2. Test with manual button\n3. Check recognition system\n4. Contact support if issue persists",
+            
+            // Database
+            "backup database": "Database backup:\n1. Settings → Database\n2. Click 'Backup Now'\n3. Choose location\n4. Set auto-backup schedule",
+            "restore database": "To restore backup:\n1. Settings → Database\n2. Click 'Restore'\n3. Select backup file\n4. Confirm restore",
+            
+            // Default response
+            "default": "I'm not sure about that. Try asking about:\n• Adding family members\n• WhatsApp alerts setup\n• Camera troubleshooting\n• System settings\nOr type 'help' for more options."
+        };
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim().toLowerCase();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Get bot response
+            let response = chatResponses.default;
+            
+            // Check for keywords
+            if (message.includes('hello') || message.includes('hi')) {
+                response = chatResponses.hello;
+            } else if (message.includes('family') && (message.includes('add') || message.includes('new'))) {
+                response = chatResponses["add family member"];
+            } else if (message.includes('remove') || message.includes('delete')) {
+                response = chatResponses["remove family member"];
+            } else if (message.includes('whatsapp') || message.includes('alert')) {
+                response = chatResponses["whatsapp alerts"];
+            } else if (message.includes('camera') && (message.includes('black') || message.includes('not work'))) {
+                response = chatResponses["camera not working"];
+            } else if (message.includes('reset') || message.includes('factory')) {
+                response = chatResponses["system reset"];
+            } else if (message.includes('password')) {
+                response = chatResponses["forgot password"];
+            } else if (message.includes('door')) {
+                response = chatResponses["door not opening"];
+            } else if (message.includes('backup')) {
+                response = chatResponses["backup database"];
+            } else if (message.includes('restore')) {
+                response = chatResponses["restore database"];
+            } else if (message.includes('help')) {
+                response = "I can help with:\n• Adding/removing family members\n• WhatsApp alert setup\n• Camera troubleshooting\n• System reset\n• Database backup\n• Door issues\n\nTry asking one of these!";
+            }
+            
+            // Simulate typing delay
+            setTimeout(() => {
+                addMessage(response, 'bot');
+            }, 500);
+        }
+
+        function addMessage(text, sender) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleChatEnter(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function askQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+
+        function scrollToChatbot() {
+            document.querySelector('.chatbot-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // ========== OTHER FUNCTIONS ==========
+        
+        // Toggle FAQ answers
+        function toggleFAQ(faqNumber) {
+            const answer = document.getElementById('answer' + faqNumber);
+            const faqItem = document.getElementById('faq' + faqNumber);
+            
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                faqItem.classList.remove('active');
+            } else {
+                // Close other FAQs
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    ans.classList.remove('show');
+                });
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                answer.classList.add('show');
+                faqItem.classList.add('active');
+                
+                // Scroll to FAQ
+                answer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+        
+        // Open specific FAQ from quick cards
+        function openFAQ(index) {
+            toggleFAQ(index + 1);
+        }
+        
+        // Toggle troubleshooting solutions
+        function toggleSolution(problemNumber) {
+            const solution = document.getElementById('solution' + problemNumber);
+            if (solution.classList.contains('show')) {
+                solution.classList.remove('show');
+            } else {
+                solution.classList.add('show');
+            }
+        }
+        
+        // View detailed guide
+        function viewGuide(guideType) {
+            const guides = {
+                'setup': 'Initial Setup Guide - Complete hardware and software installation instructions.',
+                'face': 'Face Training Guide - Best practices for capturing faces for recognition.',
+                'alerts': 'Alert Configuration - Setup WhatsApp, email and SMS notifications.'
+            };
+            alert(guides[guideType] || 'Guide not available');
+        }
+        
+        // Download user guide
+        function downloadUserGuide() {
+            alert('📖 User guide download started!');
+        }
+        
+        // Scroll to contact section
+        function scrollToContact() {
+            document.querySelector('.contact-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        // Scroll to troubleshooting
+        function scrollToTroubleshooting() {
+            document.querySelector('.troubleshooting').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+        
+        function logout() {
+            if (confirm('Logout from Home Security System?')) {
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                toggleFAQ(1);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

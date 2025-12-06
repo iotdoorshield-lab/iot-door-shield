@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings - Smart Security</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
+            color: white;
+            padding-top: 30px;
+            position: fixed;
+            height: 100vh;
+            box-shadow: 3px 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            padding: 0 25px 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .logo h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+        }
+        
+        .logo-icon {
+            font-size: 28px;
+        }
+        
+        .nav-menu {
+            padding: 0 15px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            color: #bdc3c7;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s;
+        }
+        
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .nav-item.active {
+            background: #3498db;
+            color: white;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            width: 24px;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .header-title h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+        
+        .header-title p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .save-btn {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Settings Container */
+        .settings-container {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        /* Settings Groups */
+        .settings-group {
+            margin-bottom: 40px;
+            padding: 30px;
+        }
+        
+        .group-title {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .account-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .user-details h3 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .user-details p {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            color: #2c3e50;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .form-col {
+            flex: 1;
+        }
+        
+        /* Switch Toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #27ae60;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+        
+        /* Notification Settings */
+        .notification-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .notification-item:hover {
+            border-color: #3498db;
+            background: #f8f9fa;
+        }
+        
+        .notification-info {
+            flex: 1;
+        }
+        
+        .notification-name {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .notification-desc {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* System Status */
+        .system-status {
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-label {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .status-value {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        
+        .status-good {
+            color: #27ae60;
+        }
+        
+        .status-warning {
+            color: #f39c12;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 70px;
+            }
+            
+            .sidebar .nav-text {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .logo h2 span {
+                display: none;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2>
+                <span class="logo-icon">🏠</span>
+                <span>Home Security</span>
+            </h2>
+        </div>
+        
+        <div class="nav-menu">
+            <a href="dashboard.html" class="nav-item">
+                <span class="nav-icon">📊</span>
+                <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="database.html" class="nav-item">
+                <span class="nav-icon">👨‍👩‍👧‍👦</span>
+                <span class="nav-text">Family & Friends</span>
+            </a>
+            <a href="settings.html" class="nav-item active">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">Settings</span>
+            </a>
+            <a href="help.html" class="nav-item">
+                <span class="nav-icon">❓</span>
+                <span class="nav-text">Help</span>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-title">
+                <h1>Account Settings</h1>
+                <p>Manage your account and notification preferences</p>
+            </div>
+            
+            <div class="header-actions">
+                <button class="btn save-btn" onclick="saveSettings()">
+                    💾 Save Changes
+                </button>
+                <button class="btn logout-btn" onclick="logout()">🚪 Logout</button>
+            </div>
+        </div>
+        
+        <!-- Settings Container -->
+        <div class="settings-container">
+            <!-- Account Information -->
+            <div class="settings-group">
+                <h2 class="group-title">👤 Account Information</h2>
+                
+                <div class="account-info">
+                    <div class="avatar">A</div>
+                    <div class="user-details">
+                        <h3>Admin User</h3>
+                        <p>Administrator Account</p>
+                        <p>Member since: January 2024</p>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-input" id="username" value="admin" disabled>
+                            <small style="color: #7f8c8d; font-size: 12px;">Username cannot be changed</small>
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" id="email" value="admin@homesecurity.com">
+                            <small style="color: #7f8c8d; font-size: 12px;">For notifications and account recovery</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label class="form-label">Current Password</label>
+                            <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password">
+                        </div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group">
+                            <label class="form-label">New Password</label>
+                            <input type="password" class="form-input" id="newPassword" placeholder="Enter new password">
+                            <small style="color: #7f8c8d; font-size: 12px;">Minimum 8 characters</small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Confirm New Password</label>
+                    <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password">
+                </div>
+            </div>
+            
+            <!-- Notification Settings -->
+            <div class="settings-group">
+                <h2 class="group-title">📱 Notification Settings</h2>
+                
+                <div class="notification-item">
+                    <div class="notification-info">
+                        <div class="notification-name">WhatsApp Alerts</div>
+                        <div class="notification-desc">Receive instant security alerts on WhatsApp</div>
+                    </div>
+                    <div class="notification-control">
+                        <label class="switch">
+                            <input type="checkbox" id="whatsappAlerts" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-info">
+                        <div class="notification-name">Email Notifications</div>
+                        <div class="notification-desc">Get email updates about system activity</div>
+                    </div>
+                    <div class="notification-control">
+                        <label class="switch">
+                            <input type="checkbox" id="emailNotifications">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-info">
+                        <div class="notification-name">Push Notifications</div>
+                        <div class="notification-desc">Browser notifications for urgent alerts</div>
+                    </div>
+                    <div class="notification-control">
+                        <label class="switch">
+                            <input type="checkbox" id="pushNotifications" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-info">
+                        <div class="notification-name">SMS Alerts</div>
+                        <div class="notification-desc">Emergency SMS alerts for critical events</div>
+                    </div>
+                    <div class="notification-control">
+                        <label class="switch">
+                            <input type="checkbox" id="smsAlerts">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-info">
+                        <div class="notification-name">Daily Summary</div>
+                        <div class="notification-desc">Receive daily activity report at 8 PM</div>
+                    </div>
+                    <div class="notification-control">
+                        <label class="switch">
+                            <input type="checkbox" id="dailySummary" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- System Status -->
+            <div class="system-status">
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">📊 System Status</h3>
+                
+                <div class="status-item">
+                    <span class="status-label">System Version</span>
+                    <span class="status-value">v2.1.4</span>
+                </div>
+                
+                <div class="status-item">
+                    <span class="status-label">Database Size</span>
+                    <span class="status-value">245 MB / 1 GB</span>
+                </div>
+                
+                <div class="status-item">
+                    <span class="status-label">Last Backup</span>
+                    <span class="status-value">Today, 02:00 AM</span>
+                </div>
+                
+                <div class="status-item">
+                    <span class="status-label">System Status</span>
+                    <span class="status-value status-good">● Operational</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== SETTINGS MANAGEMENT ==========
+        
+        let userSettings = {
+            username: "admin",
+            email: "admin@homesecurity.com",
+            whatsappAlerts: true,
+            emailNotifications: false,
+            pushNotifications: true,
+            smsAlerts: false,
+            dailySummary: true
+        };
+        
+        // Load settings from localStorage
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('userSettings');
+            if (savedSettings) {
+                userSettings = JSON.parse(savedSettings);
+                applySettings();
+            }
+        }
+        
+        // Apply settings to UI
+        function applySettings() {
+            document.getElementById('username').value = userSettings.username;
+            document.getElementById('email').value = userSettings.email;
+            document.getElementById('whatsappAlerts').checked = userSettings.whatsappAlerts;
+            document.getElementById('emailNotifications').checked = userSettings.emailNotifications;
+            document.getElementById('pushNotifications').checked = userSettings.pushNotifications;
+            document.getElementById('smsAlerts').checked = userSettings.smsAlerts;
+            document.getElementById('dailySummary').checked = userSettings.dailySummary;
+        }
+        
+        // Save settings
+        function saveSettings() {
+            // Validate passwords
+            const currentPass = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+            
+            if (newPass) {
+                if (newPass.length < 8) {
+                    alert("❌ New password must be at least 8 characters!");
+                    return;
+                }
+                
+                if (newPass !== confirmPass) {
+                    alert("❌ New passwords don't match!");
+                    return;
+                }
+                
+                if (!currentPass) {
+                    alert("❌ Please enter your current password!");
+                    return;
+                }
+                
+                // In real app, verify current password with server
+                alert("✅ Password changed successfully!");
+            }
+            
+            // Update settings
+            userSettings.email = document.getElementById('email').value;
+            userSettings.whatsappAlerts = document.getElementById('whatsappAlerts').checked;
+            userSettings.emailNotifications = document.getElementById('emailNotifications').checked;
+            userSettings.pushNotifications = document.getElementById('pushNotifications').checked;
+            userSettings.smsAlerts = document.getElementById('smsAlerts').checked;
+            userSettings.dailySummary = document.getElementById('dailySummary').checked;
+            
+            // Save to localStorage
+            localStorage.setItem('userSettings', JSON.stringify(userSettings));
+            
+            // Show success
+            const btn = document.querySelector('.save-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ Saved!';
+            btn.style.background = '#27ae60';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 2000);
+            
+            // Clear password fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+        
+        // Logout
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('currentSession');
+                window.location.href = 'login.html';
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSettings();
+        });
+    </script>
+</body>
+</html>
